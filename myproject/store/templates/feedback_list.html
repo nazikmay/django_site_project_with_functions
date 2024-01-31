@@ -1,0 +1,30 @@
+<ul>
+
+    <li>
+        <p> {{ goods.title}}</p>
+        <p> {{ goods.description}}</p>
+        {% if goods.image %}
+          <img src="{{goods.image.url }}" alt="{{goods.title}}">
+        {%endif%}
+        <p> {{ goods.price}}</p>
+        <p> {{ goods.data}}</p>
+        <p> {{ goods.category}}</p>
+
+    </li>
+
+    <li>
+      {{% for feedback in feedback_list %}}
+       <p> {{ feedback.author}}</p>
+        <p> {{ feedback.text}}</p>
+        <p> {{ feedback.data}}</p>
+
+        {%endfor%}
+    </li>
+
+
+
+
+
+
+
+</ul>

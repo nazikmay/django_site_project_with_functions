@@ -1,0 +1,10 @@
+<ul>
+    {% for i in goods %}
+    <li>
+         <a href="{% url 'goods_detail' i.pk  %}">{{i.title}}</a>
+        <p> Date: {{ i.date}}</p>
+
+    </li>
+    {% endfor%}
+</ul>
+<button onclick="window.location.href='{% url 'goods_create' %}'"> Create </button>

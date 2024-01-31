@@ -1,0 +1,37 @@
+<ul>
+    <li>
+    <p>Title: {{goods.title}}</p>
+    <p>Description: {{goods.description}}</p>
+    {% if goods.image%}
+        <p><img src="{{ goods.image.url  }}" alt="{{goods.title}}"></p>
+        {% endif %}
+
+    <p>Price: {{goods.price}}</p>
+    <p>Category: {{goods.category}}</p>
+    <p>Date: {{goods.date}}</p>
+    </li>
+
+
+    <h2>Feedbacks: </h2>
+    <li>
+        {% for feedback in feedback_list %}
+        <p>Author: {{feedback.author}}</p>
+        <p>Text: {{feedback.text}}</p>
+        <p>Date: {{feedback.date}}</p>
+        {% endfor %}
+    </li>
+</ul>
+
+
+<!-- Delete html жаны Good_html ачбай эле ушу жакка жазып койсок болот -->
+
+<form method="post" action="{% url 'goods_delete' goods.pk %}">
+    {% csrf_token %}
+
+    <button type="submit"> Delete</button>  <!-- Delete кнопкасы-->
+
+</form>
+<!-- templatedeki goods_create ге ссылка берип "Create" кнопкасыны жазадык -->
+<button> <a href=" {% url 'goods_create' %}"> Create </button>
+<button> <a href=" {% url 'goods_list' %}"> Cancel </button>
+

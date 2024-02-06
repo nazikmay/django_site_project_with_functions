@@ -1,0 +1,32 @@
+
+<body>
+
+<!-- Display Category options -->
+<form action="" method="get">
+    <label for="category">Select Category:</label>
+    <select name="category" id="category">
+        <option value="">All Categories</option>
+        {% for category in category %}
+            <option value="{{ category.name }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+    <br>
+
+    <!-- Search input -->
+    <label for="q">Search:</label>
+    <input type="text" name="q" id="q" value="{{ request.GET.q }}">
+    <br>
+
+    <!-- Submit button -->
+    <button type="submit">Search</button>
+</form>
+
+<!-- Display Goods based on queryset -->
+<ul>
+    {% for good in object_list %}
+        <li>{{ good.title }} - {{ good.category.name }}</li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>

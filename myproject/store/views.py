@@ -2,11 +2,35 @@ from django.shortcuts import render,get_object_or_404, redirect
 
 from .models import Category, Goods, Feedback
 from .forms import GoodsForm
+from django.urls import reverse_lazy
+
+
 
 
 def goods_list(request):
     goods = Goods.objects.all()
     return render(request, 'goods_list.html', {'goods': goods})
+
+
+def get_context_data(self, **kwargs):
+        context  = super().get_context_data(**kwargs)
+        context['category'] = Category.objects.all()
+        return context
+
+def get_queryset(self):
+        query = self.request.GET.get('q')
+        category = self.request.GET.get('category')
+
+        if category:
+            category_object = Category.objects.get(name=category)
+            queryset = Goods.objects.filter(category=category_object)
+        else:
+            queryset = Goods.objects.all()
+
+        if query:
+            queryset = queryset.filter(title__icontains=query)
+
+        return queryset
 
 def goods_detail(request, pk):
     goods = get_object_or_404(Goods, pk=pk)
@@ -39,4 +63,5 @@ def goods_delete(request, pk):
     goods = get_object_or_404(Goods, pk=pk)
     goods.delete()
     return redirect('goods_list')
+
 

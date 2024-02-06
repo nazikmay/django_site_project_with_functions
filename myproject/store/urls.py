@@ -1,10 +1,10 @@
 from django.urls import path, include
-from .views import goods_list, goods_create, goods_update, goods_detail, goods_delete
+from .views import goods_list, goods_create, goods_update, goods_detail, goods_delete, get_context_data
 
 
 urlpatterns = [
 
-    path('', goods_list, name='goods_list'),
+    path('',get_context_data, name='goods_list'),
     path('<int:pk>', goods_detail, name='goods_detail'),
     path('create/', goods_create, name='goods_create'),
     path('<int:pk>/update/', goods_update, name='goods_update'),
